@@ -13,12 +13,12 @@ class VisiteurController extends Controller
     public function index()
     {
         $visiteurs = Visiteur::all();
-        return view('/visiteurs/liste', compact('visiteurs'));
+        return view('visiteurs.liste', compact('visiteurs'));
     }
 
     public function create()
     {
-        return view('/visiteurs/ajout');
+        return view('visiteurs.ajout');
     }
 
     public function store(Request $request)
@@ -32,38 +32,42 @@ class VisiteurController extends Controller
         Visiteur::create($request->all());
 
 
-        return redirect('/visiteurs/ajout')->with("success", "Un nouveau visiteur a été ajouté");
+        return redirect()->route('visiteurs.ajout')
+            ->with('success', 'Un nouveau visiteur a été ajouté');
     }
 
-    public function edit(Visiteur $visiteur)
+    public function edit($id)
     {
-        return view('/visiteurs/modif', ['visiteur' => $visiteur]);
+
+        if (Visiteur::find($id) != null) {
+            $visiteur = Visiteur::find($id);
+            return view('visiteurs.modif', compact('visiteur'));
+        }
+        return back();
+
+        /* return view('visiteurs.modif', ['visiteur' => $id]); */
     }
 
-    public function update()
+
+
+    public function update(Request $request)
     {
-        /*  $request->validate([
-            "visiteur_nom" => "required",
-            "visiteur_prenom" => "required",
-            "visiteur_mail" => "required"
-        ]); */
+        $update = [
+            "id" => $request->id,
+            "visiteur_nom" => $request->visiteur_nom,
+            "visiteur_prenom" => $request->visiteur_prenom,
+            "visiteur_mail" => $request->visiteur_mail,
+        ];
 
-        /*   $updating = Visiteur::table('simplon')
-            ->where('id', $request->input('id'))
-            ->update([
-                "visiteur_nom" => $request->input('visiteur_nom'),
-                "visiteur_prenom" => $request->input('visiteur_prenom'),
-                "visiteur_mail" => $request->input('visiteur_mail')
-
-            ]); */
-
-        return redirect('/visiteurs/liste');
+        Visiteur::where('id', $request->id)->update($update);
+        return redirect('visiteurs.liste')->with('successUpdate', 'Modification réussit !');
     }
 
-    /*  public function destroy(Visiteur $visiteur)
+    public function destroy($id)
     {
+        $visiteur = Visiteur::find($id);
         $visiteur->delete();
 
-        return redirect('/visiteurs/liste');
-    } */
+        return redirect('visiteurs.liste')->with('successDelete', 'Le visiteur a été supprimer');
+    }
 }

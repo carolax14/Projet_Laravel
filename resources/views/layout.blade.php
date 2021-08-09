@@ -80,15 +80,15 @@
                         <a href="#"> <i class="far fa-calendar-alt"></i>Calendrier </a>
                     </li>
                     <li>
-                        <a href=""> <i class="far fa-address-book"></i>Réservations </a>
+                        <a href="{{ route('reservations.liste') }}"> <i class="far fa-address-book"></i>Réservations </a>
                     </li>
                     <li>
                         <a href="#collapseExample" aria-expanded="false" data-bs-toggle="collapse">
                             <i class="fas fa-user-alt"></i>Visiteurs
                         </a>
                         <ul id="collapseExample" class="collapse list-unstyled">
-                            <li><a href="/visiteurs/ajout">Ajouter</a></li>
-                            <li><a href="/visiteurs/liste">Liste des visiteurs</a></li>
+                            <li><a href="{{ route('visiteurs.ajout') }}">Ajouter</a></li>
+                            <li><a href="{{ route('visiteurs.liste') }}">Liste des visiteurs</a></li>
                         </ul>
                     </li>
                     <li>
@@ -96,8 +96,8 @@
                             <i class="fas fa-laptop"></i>Ordinateurs
                         </a>
                         <ul id="example" class="collapse list-unstyled">
-                            <li><a href="index.php?uc=ordinateur&action=saisirOrdinateur">Ajouter</a></li>
-                            <li><a href="">Liste des ordinateurs</a></li>
+                            <li><a href="{{ route('ordinateurs.ajout') }}">Ajouter</a></li>
+                            <li><a href="{{ route('ordinateurs.liste') }}">Liste des ordinateurs</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -105,11 +105,6 @@
             <div class="content-inner">
 
                 @yield('content')
-
-
-
-
-
 
                 <!-- Page Footer-->
                 <footer class="main-footer">

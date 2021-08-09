@@ -19,8 +19,13 @@
     <div class="container-fluid">
         <div class="row">
             @if(session()->has("successDelete"))
-            <div class="alert bg-green">
+            <div class="alert bg-red">
                 {{session()->get("successDelete")}}
+            </div>
+            @endif
+            @if(session()->has("successUpdate"))
+            <div class="alert bg-green">
+                {{session()->get("successUpdate")}}
             </div>
             @endif
             <div class="col-lg-12">
@@ -30,8 +35,6 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <!-- <form action="index.php?uc=visiteur&action=supprimerVisiteur" method="POST"> -->
-
 
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -49,19 +52,26 @@
                                         <td class="text-capitalize">{{$visiteur->visiteur_prenom}}</td>
                                         <td>{{$visiteur->visiteur_mail}}</td>
                                         <td>
-                                            <a href="/visiteurs/{{ $visiteur->id }}/modif">
-                                                <i name="Modifier" class="fas fa-edit btn-edit"></i>
-                                            </a>
-                                            <form action="/visiteurs/liste{{ $visiteur->id }}" method="GET">
-                                                @method('delete')
-                                                @csrf
+                                            <div class="btn-group">
 
-                                                <a href="" onclick="if(confirm('Voulez-vous supprimer cet utilisateur ?'))">
-                                                    <i name="Supprimer" class="fas fa-trash-alt btn-supp"></i>
+                                                <a href="{{ route('visiteurs.edit',$visiteur->id) }}">
+                                                    <button type="submit" value="Modifier" class="btn">
+                                                        <i name="Modifier" class="fas fa-edit btn-edit"></i>
+                                                    </button>
                                                 </a>
 
-                                            </form>
+                                                <form action="{{ route('visiteurs.delete',$visiteur->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
 
+                                                    <a href="" onclick="return confirm('Voulez-vous supprimer cet utilisateur ?')">
+                                                        <button type="submit" value="Supprimer" class="btn">
+                                                            <i name="Supprimer" class="fas fa-trash-alt btn-supp"></i>
+                                                        </button>
+                                                    </a>
+
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach

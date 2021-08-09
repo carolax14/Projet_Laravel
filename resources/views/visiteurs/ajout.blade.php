@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                         <p></p>
-                        <form action="/visiteurs/ajout" method="POST">
+                        <form action="{{ route('visiteurs.ajout') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col form-group">
