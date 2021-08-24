@@ -82,7 +82,7 @@
                 <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a href="welcome"> <i class="fas fa-home"></i>Acceuil </a>
+                        <a href="{{ route('dashboard') }}"> <i class="fas fa-home"></i>Acceuil </a>
                     </li>
                     <li>
                         <a href="#"> <i class="far fa-calendar-alt"></i>Calendrier </a>

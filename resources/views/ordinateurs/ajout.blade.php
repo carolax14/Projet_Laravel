@@ -11,7 +11,7 @@
 <!-- Breadcrumb-->
 <div class="breadcrumb-holder container-fluid">
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="home.php">Acceuil</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Acceuil</a></li>
         <li class="breadcrumb-item active">Ordinateurs - Créer</li>
     </ul>
 </div>
