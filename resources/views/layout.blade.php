@@ -50,8 +50,15 @@
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                             <!-- Logout    -->
                             <li class="nav-item">
-                                <a href="index.php?uc=deconnexion&action=demandeDeconnexion" onclick="return confirm('Voulez-vous quitter votre session ?');" class="nav-link logout">
-                                    <span class="d-none d-sm-inline">Déconnexion</span><i class="fas fa-sign-out-alt"></i></a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                        {{ __('Déconnexion') }}
+                                    </x-responsive-nav-link>
+
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -64,10 +71,11 @@
                 <!-- Sidebar Header-->
                 <div class="sidebar-header d-flex align-items-center">
                     <div class="avatar">
-                        <img src="public/img/avatar.svg" alt="..." class="img-fluid rounded-circle" />
+                        <img src="{{ asset('/img/avatar.svg') }}" alt="..." class="img-fluid rounded-circle" />
                     </div>
                     <div class="title">
                         <h1 class="h4 text-capitalize"></h1>
+                        <div>{{ Auth::user()->name }}</div>
                         <p>Administrateur</p>
                     </div>
                 </div>
